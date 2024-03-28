@@ -15,9 +15,45 @@
 - **정의**: 의존성 주입은 객체가 그것의 의존성을 직접 생성하는 대신 외부로부터 제공받는 디자인 패턴이다. 스프링의 맥락에서 볼 때, IoC 컨테이너는 빈이 필요로 하는 의존성을 자동으로 생성하고 주입한다. 이는 개발자가 소스 코드에서 직접 인스턴스를 생성하고 의존성을 생성하는 대신에, 스프링 컨테이너가 미리 생성된 빈을 필요로 하는 객체에 주입한다는 의미.
 
 - **원리**: 의존성 주입은 제어의 역전(IoC) 원칙의 한 형태로, 객체의 생성과 의존성 관리를 프로그래머가 아닌 프레임워크에 맡긴다.
+
   1. **생성자 주입(Constructor Injection)**: 생성자의 파라미터를 사용해서 객체 생성 시점에 모든 필수 의존성을 생성자를 통해 주입한다. 이 방법은 의존성이 명확하게 드러나고 변경 불가능한 객체를 만들때 유리하다.
+
+  ```java
+    @Service
+    public class BookService {
+        private final BookRepository repository;
+
+        @Autowired
+        public BookService(BookRepository repository) {
+            this.repository = repository;
+        }
+    }
+  ```
+
   2. **세터 주입(Setter Injection)**: 설정자 기반 의존성 주입이라고도 불린다. 객체 생성 후, 세터 메서드나 프로퍼티를 통해 의존성을 주입한다. 이 방법은 선택적 의존성이나 변경 가능한 의존성에 적합하다.
-  3. **필드 주입(Field Injection)**: @Autowired 어노테이션을 사용하여 객체의 필드에 직접 의존성을 주입한다. 코드는 간결해지지만, 의존성이 숨겨져 있어 테스트와 유지보수가 어렵다.
+
+  ```java
+    @Service
+    public class BookService {
+        private BookRepository repository;
+
+        @Autowired
+        public void setRepository(BookRepository repository) {
+            this.repository = repository;
+        }
+    }
+  ```
+
+  3. **필드 주입(Field Injection)**: 클래스 필드에 @Autowired 어노테이션을 사용하여 객체의 필드에 직접 의존성을 주입한다. 코드는 간결해지지만, 의존성이 숨겨져 있어 테스트와 유지보수가 어렵다.
+
+  ```java
+  @Service
+  public class BookService {
+
+      @Autowired
+      private BookRepository repository;
+  }
+  ```
 
 다만, 스프링에서는 필드 기반보다 생성자 주입 방식을 권장한다. 이유는 다음과 같은데, 1. 객체가 생성되는 시점에 생성자를 호출하여 최소 1회만 주입하기 때문에 불변 객체를 보장 할 수 있다. 2. A객체에서 B객체를 참조하고, B에서 A를 참조하는 순환 참조를 방지 할 수 있다. 3. 단위 테스트를 작성할때 별도의 mocking처리 없이 테스트가 가능하다.
 
