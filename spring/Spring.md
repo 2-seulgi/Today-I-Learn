@@ -113,3 +113,35 @@ AOP는 다음과 같은 이유로 필요하다 :
 - **코드 중복 감소**: 횡단 관심사를 한 곳에 모아두어 비슷한 코드의 반복을 줄일 수 있다.
 - **비즈니스 로직과 시스템 서비스의 분리**: AOP를 사용하면 비즈니스 로직을 깔끔하게 유지하면서 필요한 시스템 서비스(예: 트랜잭션 관리)를 분리할 수 있다.
 - **유연성 및 유지보수성 향상**: 횡단 관심사를 중앙에서 관리함으로써 애플리케이션의 변경 사항이 발생할 때 쉽게 대응할 수 있다.
+
+## properties 설정
+
+스프링부트는 프로퍼티 개념을 통해 다양한 환경을 지원한다.
+
+- application-{profile}.properties: 예를 들어, 개발 환경 속성은 application-dev.properties, 운영환경은 application-real.properties 등으로 정의할 수 있다.
+
+### 외부 구성
+
+외부에서 속성을 쉽게 재정의 할 수 있다. application.properties 또는 application.yml 파일에 정의된 어떤 속성도 다음 방법으로 재정의할 수 있다:
+
+- 커맨드 라인 인자: java -jar myapp.jar --property.name=value
+- 환경 변수: PROPERTY_NAME=value java -jar myapp.jar
+- 시스템 속성: java -Dproperty.name=value -jar myapp.jar
+
+### 사용방법
+
+애플리케이션 내 어디에서나 @Value 어노테이션을 사용하거나 ConfigurationProperties 클래스를 설정하여 접근할 수 있다.
+
+```java
+@Value("${property.name}")
+private String propertyName;
+```
+
+또는 이렇게 사용 한다.
+
+```java
+@ConfigurationProperties(prefix="myapp")
+public class MyAppProperties {
+    private String property;
+}
+```
