@@ -16,7 +16,7 @@ Today I Learned. 그날 그날 배운것 기록
 
 ## Spring
 
-- [Spring](https://github.com/2-seulgi/Today-I-Learn/blob/main/spring/Spring.md)
+- [스프링 프레임워크 개요](https://github.com/2-seulgi/Today-I-Learn/blob/main/spring/Spring.md)
 
   - [JDBC](https://github.com/2-seulgi/Today-I-Learn/blob/main/spring/JDBC.md)
   - [Transactions](https://github.com/2-seulgi/Today-I-Learn/blob/main/spring/Transactions.md)
