@@ -72,6 +72,6 @@ REST 의 특징을 준수하는 인터페이스를 RESTful API라고 한다.
 4. **파일 확장자는 URI에 포함시키지 않는다.**
 5. **행위(조회, 생성, 수정)를 포함시키지 않고 HTTP Method로 표현하는 게 좋다.**
 
-   - ex) `https://test.blog.com/post`를 사용하고 메소드 형식을 DELETE로 사용해.
+   - ex) `https://test.blog.com/post`를 사용하고 메소드 형식을 DELETE로 사용.
 
 6. **영어 단어는 복수형을 사용하는 게 좋다.**
